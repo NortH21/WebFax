@@ -12,7 +12,7 @@
     <p>
 <?php
 include "config.php";
-header('Refresh: 15; URL=http://fax.yarnet.ru');
+header('Refresh: 15; URL=http://fax.domain.ru');
 
 $outboundfax_context = "faxsend-t38";
 $asterisk_spool_folder = "/var/spool/asterisk/outgoing";
