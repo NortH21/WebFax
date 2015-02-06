@@ -12,14 +12,14 @@
     <p>
 <?php
 include "config.php";
-header('Refresh: 15; URL=http://fax.yarnet.ru');
+header('Refresh: 15; URL=http://fax.domain.org');
 
 $outboundfax_context = "faxsend-t38";
 $asterisk_spool_folder = "/var/spool/asterisk/outgoing";
 $faxHeader = $_POST["faxHeader"];
 $dest = $_POST["dest"];
 $send_fax_disa_number = $_POST["fax_disa_number"];
-$localID = "XXXXXX";
+$localID = "XXXXX";
 
 function unique_name($path, $suffix)
 {
@@ -185,7 +185,7 @@ if ($error == $error_no_error) {
 ?>
 </p>
 </div>
-<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. v.1.0</p>
+<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. </p>
 </div>
 </body>
 </html>

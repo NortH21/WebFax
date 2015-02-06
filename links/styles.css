@@ -1,5 +1,5 @@
 body {
-	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	font: 85%/1.4 Verdana, Arial, Helvetica, sans-serif;
 	background: #42413C;
 	margin: 0;
 	padding: 0;
@@ -20,7 +20,7 @@ a img {
 }
 
 .content p {
-	margin-bottom:30px;
+	margin-bottom:30px;	
 }
 td {
 	padding: 5px;
@@ -44,15 +44,11 @@ a:hover, a:active, a:focus {
 .container {
 	width: 960px;
 	background: #FFF;
-	margin: 0 auto;
-    margin-top: 150px;	/* Отступ сверху */
+	margin: 6% auto 6%;
 }
 
 .content {
 	padding: 20px ;
-}
-.container {
-	/
 }
 
 .fltrt {
@@ -70,8 +66,8 @@ a:hover, a:active, a:focus {
 	line-height: 0px;
 }
 
-.textfieldRequiredMsg,
-.textfieldInvalidFormatMsg,
+.textfieldRequiredMsg, 
+.textfieldInvalidFormatMsg, 
 .textfieldMinValueMsg,
 .textfieldMaxValueMsg,
 .textfieldMinCharsMsg,
@@ -80,8 +76,8 @@ a:hover, a:active, a:focus {
 	display: none;
 }
 
-.textfieldRequiredState .textfieldRequiredMsg,
-.textfieldInvalidFormatState .textfieldInvalidFormatMsg,
+.textfieldRequiredState .textfieldRequiredMsg, 
+.textfieldInvalidFormatState .textfieldInvalidFormatMsg, 
 .textfieldMinValueState .textfieldMinValueMsg,
 .textfieldMaxValueState .textfieldMaxValueMsg,
 .textfieldMinCharsState .textfieldMinCharsMsg,
@@ -96,11 +92,11 @@ a:hover, a:active, a:focus {
 	background-color: #B8F5B1;
 }
 
-input.textfieldRequiredState, .textfieldRequiredState input,
-input.textfieldInvalidFormatState, .textfieldInvalidFormatState input,
-input.textfieldMinValueState, .textfieldMinValueState input,
-input.textfieldMaxValueState, .textfieldMaxValueState input,
-input.textfieldMinCharsState, .textfieldMinCharsState input,
+input.textfieldRequiredState, .textfieldRequiredState input, 
+input.textfieldInvalidFormatState, .textfieldInvalidFormatState input, 
+input.textfieldMinValueState, .textfieldMinValueState input, 
+input.textfieldMaxValueState, .textfieldMaxValueState input, 
+input.textfieldMinCharsState, .textfieldMinCharsState input, 
 input.textfieldMaxCharsState, .textfieldMaxCharsState input {
 	background-color: #FF9F9F;
 }
@@ -122,12 +118,18 @@ input.textfieldMaxCharsState, .textfieldMaxCharsState input {
 	background-color: #eee;
 }
 
-.formLabel{
+.formLabel td,  .formLabel th, .formLabel {
 	font-size: 12px;
 	color: #666;
 	background-color: #fff;
 }
-
+.formLabel th {
+    padding: 5px 5px 5px 15px;
+    text-align: left;
+}
+.formLabel td {
+    font-size: 11px;
+}
 .footer-copyrights{
 	font-size: 10px;
 	color: #999;
@@ -135,6 +137,7 @@ input.textfieldMaxCharsState, .textfieldMaxCharsState input {
 	margin: 0px;
 	width: 960px;
 	margin: 0 auto;
+    text-align: center;
 }
 .footer-copyrights a{
 	color: #999;
@@ -143,5 +146,5 @@ input.textfieldMaxCharsState, .textfieldMaxCharsState input {
 }
 
 .error {
-    color: #900;
+    color: #900;	
 }
