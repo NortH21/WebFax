@@ -3,12 +3,12 @@ convert
 gs
 unoconv
 
-XXXXXX - номер телефона.
+XXXXXX - telephone number.
 
 /etc/asterisk/extensions.conf
 
 [fax_with_threads]
-exten => send,1,Dial(SIP/trunk_name/${RECEIVER})             ; Заменить trunk_name на название транка
+exten => send,1,Dial(SIP/trunk_name/${RECEIVER})             ; trunk_name
 exten => send,n,Goto(send-${DIALSTATUS},1)
 exten => send-CANCEL,1,Hangup()
 exten => send-ANSWER,1,Hangup()
