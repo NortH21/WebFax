@@ -1,7 +1,7 @@
-tiff2pdf
-convert
-gs
-unoconv
+apt-get install libtiff-tools
+apt-get install imagemagick
+apt-get install ghostscript
+apt-get install unoconv
 
 XXXXXX - telephone number.
 
@@ -34,7 +34,7 @@ exten => faxout,n,Set(FAXOPT(minrate)=2400)
 exten => faxout,n,Set(FAXOPT(localstationid)=${LOCALSTATIONID})
 exten => faxout,n,WaitForSilence(250,1,15)
 exten => faxout,n,SendFAX(${FAXFILE},dfzs)
-exten => faxout,n,NoOP(— ${FAXSTATUS} —${FAXERROR} —)
+exten => faxout,n,NoOP(â€” ${FAXSTATUS} â€”${FAXERROR} â€”)
 exten => faxout,n,System(/usr/bin/tiff2pdf ${FAXFILE} -o /var/spool/asterisk/fax/mnt/${FAXFILESENT}.pdf)
 exten => faxout,n,System(curl http://192.168.100.223/not.php?XXXXXX,${RECEIVER},${STARTTIME},${FAXSTATUS},${FAXERROR},${FAXFILESENT})
 exten => faxout,n,HangUp()
