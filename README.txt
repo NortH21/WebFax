@@ -61,4 +61,4 @@ exten => _XXXXXX,1,NoOP(------------------- FAX from ${CALLERID(number)} -------
  same => n,System(curl http://192.168.100.223/not.php?${CALLERID(number)},XXXXXX,${STRFTIME(${EPOCH},,%s)},${FAXSTATUS},${FAXERROR},${FAXOPT(headerinfo)})
  same => n,HangUp()
 
-Released under GPLv3.
+
