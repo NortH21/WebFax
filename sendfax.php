@@ -2,24 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Факс</title>
+<title>Ярнет.Факс</title>
 <link href="links/styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="container">
   <div class="content">
-    <h1>Факс</h1>
+    <h1>Ярнет.Факс</h1>
     <p>
 <?php
 include "config.php";
-header('Refresh: 15; URL=http://fax.domain.ru');
+header('Refresh: 15; URL=http://fax.yarnet.ru');
 
 $outboundfax_context = "faxsend-t38";
 $asterisk_spool_folder = "/var/spool/asterisk/outgoing";
 $faxHeader = $_POST["faxHeader"];
 $dest = $_POST["dest"];
 $send_fax_disa_number = $_POST["fax_disa_number"];
-$localID = "XXXXXX";
+$localID = "593001";
 
 function unique_name($path, $suffix)
 {
@@ -34,6 +34,9 @@ $error_no_error = 0;
 $input_file_noext = unique_name("/tmp", "");
 $input_file = $input_file_noext .".pdf";
 $input_file_doc = $input_file_noext .".doc";
+$input_file_odf = $input_file_noext .".odf";
+$input_file_odt = $input_file_noext .".odt";
+$input_file_ods = $input_file_noext .".ods";
 $input_file_txt = $input_file_noext .".txt";
 $input_file_jpg = $input_file_noext .".jpg";
 $input_file_jpeg = $input_file_noext .".jpeg";
@@ -114,6 +117,26 @@ $input_file_type = "pdf";
     }
 }
 
+if ($ext == "odt" || $ext == "odf" || $ext == "ods") {
+    if(move_uploaded_file($_FILES['faxFile']['tmp_name'], $input_file_odt)) {
+    $input_file = $input_file_noext . ".pdf";
+
+    $wv_command = "unoconv -f pdf $input_file_odt";
+    $wv_command_output = system($wv_command, $retval);
+
+if ($retval != 0) {
+        echo "Произошла ошибка конвертирования ODT/ODF/ODS файлов в PDF. Попробуйте загрузить файл еще раз";
+        $error = $error_converting_document;
+        $doc_convert_output = $wv_command_output;
+
+}else{
+
+$input_file_type = "pdf";
+    }
+} else{
+    echo "Произошла ошибка при загрузке файла, повторите, пожалуйста!";
+    }
+}
 if ($ext == "jpg" || $ext == "jpeg" || $ext == "JPG" || $ext == "JPEG") {
   if(move_uploaded_file($_FILES['faxFile']['tmp_name'], $input_file_jpg)) {
   $input_file = $input_file_noext . ".pdf";
@@ -133,59 +156,59 @@ echo "Произошла ошибка при загрузке файла, пов
 }
 
 if ($ext == "pdf")  {
-	if(move_uploaded_file($_FILES['faxFile']['tmp_name'], $input_file)) {
-		$input_file_type = "pdf";
-	}else{
-		echo "Произошла ошибка при загрузке файла, пожалуйста повторите!";
-	}
+        if(move_uploaded_file($_FILES['faxFile']['tmp_name'], $input_file)) {
+                $input_file_type = "pdf";
+        }else{
+                echo "Произошла ошибка при загрузке файла, пожалуйста повторите!";
+        }
 }
 
 if($error == $error_no_error && $input_file_type == "pdf") {
-	$gs_command = "gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=${input_file_tif} -f $input_file " ;
-	$gs_command_output = system($gs_command, $retval);
-	$doc_convert_output = $gs_command_output;
+        $gs_command = "gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=tiffg3 -sOutputFile=${input_file_tif} -f $input_file " ;
+        $gs_command_output = system($gs_command, $retval);
+        $doc_convert_output = $gs_command_output;
 
-	if ($retval != 0) {
-		echo "Произошла ошибка преобразование файла PDF в TIF. Попробуйте загрузить файл еще раз. ";
-		$error = $error_converting_document;
-	}
+        if ($retval != 0) {
+                echo "Произошла ошибка преобразование файла PDF в TIF. Попробуйте загрузить файл еще раз. ";
+                $error = $error_converting_document;
+        }
 
 else  {
 
-		$callfile = "Channel:Local/send@fax_with_threads\n" .
-		            "CallerID:$localID\n" .
-					"MaxRetries:1\n" .
-					"RetryTime:60\n" .
-					"WaitTime:100\n"  .
-					"Archive:yes\n"  .
-					"Context:$outboundfax_context\n"  .
-					"Extension:faxout\n" .
-					"Priority:1\n" .
-					"Set: send_fax_disa_number=$send_fax_disa_number\n" .
-					"Set:TIFF_2_SEND=$input_file_tif\n" .
-					"Set:TAGLINE=$faxHeader\n" .
-					"Set:TIMESTAMP=" . date("d/m/y : H:i:s",time()) . "\n" .
-					"Set:RECEIVER=$dest\n" .
-					"Set:LOCALSTATIONID=$localID\n";
+                $callfile = "Channel:Local/send@fax_with_threads\n" .
+                            "CallerID:$localID\n" .
+                                        "MaxRetries:1\n" .
+                                        "RetryTime:60\n" .
+                                        "WaitTime:100\n"  .
+                                        "Archive:yes\n"  .
+                                        "Context:$outboundfax_context\n"  .
+                                        "Extension:faxout\n" .
+                                        "Priority:1\n" .
+                                        "Set: send_fax_disa_number=$send_fax_disa_number\n" .
+                                        "Set:TIFF_2_SEND=$input_file_tif\n" .
+                                        "Set:TAGLINE=$faxHeader\n" .
+                                        "Set:TIMESTAMP=" . date("d/m/y : H:i:s",time()) . "\n" .
+                                        "Set:RECEIVER=$dest\n" .
+                                        "Set:LOCALSTATIONID=$localID\n";
 
-		$callfilename = unique_name("/tmp", ".call");
-		$f = fopen($callfilename, "w");
-  		fwrite($f, $callfile);
-		fclose($f);
-		rename($callfilename, $asterisk_spool_folder . substr($callfilename,4));
-	}
+                $callfilename = unique_name("/tmp", ".call");
+                $f = fopen($callfilename, "w");
+                fwrite($f, $callfile);
+                fclose($f);
+                rename($callfilename, $asterisk_spool_folder . substr($callfilename,4));
+        }
 }
 
 if ($error == $error_no_error) {
-	echo " Через 15 сек. Вы будете перенаправлены на главную страницу. ".
+        echo " Через 15 сек. Вы будете перенаправлены на главную страницу. ".
          " Отправка вашего факса поставлена в очередь. ";
 }else if ($error == $error_converting_document) {
-	echo "<span class='error'>Ваш факсимильный документ не может быть преобразован. Пожалуйста, попробуйте снова.";
+        echo "<span class='error'>Ваш факсимильный документ не может быть преобразован. Пожалуйста, попробуйте снова.";
 }
 ?>
 </p>
 </div>
-<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. v.1.0</p>
+<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="http://fax.yarnet.ru/changelog">v.1.0.2</a></p>
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Факс</title>
+<title>Ярнет.Факс</title>
 <script src="links/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="links/jquery.tablesorter.js" type="text/javascript"></script>
 <link href="links/styles.css" rel="stylesheet" type="text/css" />
@@ -10,7 +10,7 @@
 <body>
 <div class="container">
 <div class="content">
-  <h1>Факс</h1>
+  <h1>Ярнет.Факс</h1>
   <br>
     <table id="Table1" width="100%" border="0" cellpadding="0" cellspacing="0" class="formLabel">
     <thead>
@@ -46,14 +46,14 @@ $getlog_query = mysql_query("SELECT source,destination,time,status,error,file FR
 while ($getlog_result = mysql_fetch_assoc($getlog_query))
 {
     echo '<tr><td>'.date('d-m-Y H:i:s', $getlog_result['time']).'</td><td>'.$getlog_result['source'].'</td><td></td><td>'.$getlog_result['destination'].'</td>';
-    echo '<td>'.($getlog_result['status'] == "SUCCESS" ? ($getlog_result['source'] == "XXXXXX" ? "<font color='green'>Отправлен</font>" : "<font color='blue'>Получен<font>") : "<font color='red'>Увы и ах</font>").'</td><td><a href="/files/'.$getlog_result['file'].'.pdf">Файл</a></td></tr>';
+    echo '<td>'.($getlog_result['status'] == "SUCCESS" ? ($getlog_result['source'] == "593001" ? "<font color='green'>Отправлен</font>" : "<font color='blue'>Получен<font>") : "<font color='red'>Увы и ах</font>").'</td><td><a href="/files/'.$getlog_result['file'].'.pdf">Файл</a></td></tr>';
 }
 mysql_close($connect);
 ?>
     </tbody>
   </table>
 </div>
-<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. v.1.0</p>
+<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="http://fax.yarnet.ru/changelog">v.1.0.2</a></p>
 </div>
 <script type="text/javascript">
 $(document).ready(function()
