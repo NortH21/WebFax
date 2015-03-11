@@ -3,12 +3,10 @@ apt-get install imagemagick
 apt-get install ghostscript
 apt-get install unoconv
 
-XXXXXX - telephone number.
-
-/etc/asterisk/extensions.conf
+cat /etc/asterisk/extensions.conf
 
 [fax_with_threads]
-exten => send,1,Dial(SIP/trunk_name/${RECEIVER})             ; trunk_name
+exten => send,1,Dial(SIP/trunk_name/${RECEIVER})             
 exten => send,n,Goto(send-${DIALSTATUS},1)
 exten => send-CANCEL,1,Hangup()
 exten => send-ANSWER,1,Hangup()
@@ -43,7 +41,6 @@ exten => faxout,n,HangUp()
 exten => _XXXXXX,1,NoOP(------------------- FAX from ${CALLERID(number)} ------------------)
  same => n,Answer(5)
  same => n,Background(/var/lib/asterisk/sounds/ru/in_fax)
-; same => n,Set(DT=${TIMESTAMP}-${CALLERIDNUM}-${UNIQUEID})
  same => n,Set(FAXOPT(headerinfo)=Received-from-${CALLERID(number)}-${STRFTIME(${EPOCH},,%d%m%Y-%H%M)})
  same => n,Set(FAXOPT(localstationid)=${LOCALSTATIONID})
  same => n,Set(FAXOPT(maxrate)=14400)
