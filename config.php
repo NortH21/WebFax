@@ -3,4 +3,7 @@ $db_location="localhost";
 $db_user="faxadmin";
 $db_pwd="Mfklw4rtndsf";
 $db_name="fax";
+$own_phone_number="593113";
+$version="v.1.0.3";
+$domain="http://ihor.e3rc.ru/fax";
 ?>

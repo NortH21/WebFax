@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Ярнет.Факс</title>
+<title>Факс</title>
 <script src="links/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="links/jquery.tablesorter.js" type="text/javascript"></script>
 <link href="links/styles.css" rel="stylesheet" type="text/css" />
@@ -10,7 +10,7 @@
 <body>
 <div class="container">
 <div class="content">
-  <h1>Ярнет.Факс</h1>
+  <h1>Факс</h1>
   <br>
     <table id="Table1" width="100%" border="0" cellpadding="0" cellspacing="0" class="formLabel">
     <thead>
@@ -53,7 +53,7 @@ mysql_close($connect);
     </tbody>
   </table>
 </div>
-<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="http://fax.yarnet.ru/changelog">v.1.0.2</a></p>
+<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="<?=$domain; ?>/changelog"><?=$version; ?></a></p> 
 </div>
 <script type="text/javascript">
 $(document).ready(function()

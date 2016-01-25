@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Ярнет.Факс</title>
+<title>Факс</title>
 <script src="links/val.js" type="text/javascript" ></script>
 <script src="links/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="links/jquery.tablesorter.js" type="text/javascript"></script>
@@ -12,14 +12,14 @@
 <body>
 <div class="container">
 <div class="content">
-  <h1>Ярнет.Факс</h1>
+  <h1>Факс</h1>
     <p>Пожалуйста, воспользуйтесь формой ниже для ввода необходимой информации и нажмите кнопку &quot;отправить факс&quot;.
     <form action="sendfax.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
       <table width="892" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td width="188" class="formLabel">Заголовок факса</td>
           <td width="232"><label for="faxHeader"></label>
-          <input name="faxHeader" type="text" id="faxHeader" value="Yarnet LTD" /></td>
+          <input name="faxHeader" type="text" id="faxHeader" value="Fax e3rc.ru" /></td>
           <td width="458"  class="descriptionText">Введите заголовок, который должен отображаться в верхней части вашего факса.</td>
         </tr>
         <tr>
@@ -28,7 +28,7 @@
             <span id="sprytextfield3">
             <input name="dest" type="text" id="dest" value="" /><br />
           <span class="textfieldRequiredMsg">Это поле является обязательным.</span><span class="textfieldInvalidFormatMsg">Неверный Формат.</span></span></td>
-          <td class="descriptionText">Номер назначения факса. Пожалуйста, не вставляйте пробелы или специальные символы. Номер в формате <strong>593001</strong> или <strong>84852593001</strong></td>
+          <td class="descriptionText">Номер назначения факса. Пожалуйста, не вставляйте пробелы или специальные символы. Номер в формате <strong>593113</strong> или <strong>8XXXX593113</strong></td>
         </tr>
         <tr>
           <td width="188" class="formLabel">Внутренний номер факса</td>
@@ -55,14 +55,15 @@
     </thead>
     <tbody>
 <?php
-$connect = mysql_connect('localhost','faxadmin','Mfklw4rtndsf') or die('Хьюстон у нас проблема');
+include "config.php";
+$connect = mysql_connect($db_location,$db_user,$db_pwd) or die('Хьюстон у нас проблема');
 mysql_select_db('fax');
 mysql_query('SET names utf8');
 $getlog_query = mysql_query("SELECT source,destination,time,status,error,file FROM `fax` ORDER BY fax.time DESC LIMIT 10");
 while ($getlog_result = mysql_fetch_assoc($getlog_query))
 {
     echo '<tr><td>'.date('d-m-Y H:i:s', $getlog_result['time']).'</td><td>'.$getlog_result['source'].'</td><td></td><td>'.$getlog_result['destination'].'</td>';
-    echo '<td>'.($getlog_result['status'] == "SUCCESS" ? ($getlog_result['source'] == "593001" ? "<font color='green'>Отправлен</font>" : "<font color='blue'>Получен<font>") : "<font color='red'>Увы и ах</font>").'</td><td><a href="/files/'.date('m_Y', $getlog_result['time']).'/'.$getlog_result['file'].'.pdf">Файл</a></td></tr>';
+    echo '<td>'.($getlog_result['status'] == "SUCCESS" ? ($getlog_result['source'] == $own_phone_number ? "<font color='green'>Отправлен</font>" : "<font color='blue'>Получен<font>") : "<font color='red'>Увы и ах</font>").'</td><td><a href="/files/'.date('m_Y', $getlog_result['time']).'/'.$getlog_result['file'].'.pdf">Файл</a></td></tr>';
 }
 mysql_close($connect);
 ?>
@@ -70,7 +71,7 @@ mysql_close($connect);
   </table>
  </form>
 </div>
-<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="http://fax.yarnet.ru/changelog">v.1.0.2</a></p>
+<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="<?=$domain; ?>/changelog"><?=$version; ?></a></p>
 </div>
 <script type="text/javascript">
 var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytextfield3", "integer");
