@@ -2,9 +2,13 @@
 ![alt text](http://joxi.ru/n2YaBgKcjVola2.png)
 
 apt-get install libtiff-tools
+
 apt-get install imagemagick
+
 apt-get install ghostscript
+
 apt-get install unoconv
+
 apt-get install curl libcurl3 libcurl3-dev php5-curl
 
 cat /etc/asterisk/extensions.conf
