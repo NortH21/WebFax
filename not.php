@@ -5,7 +5,7 @@ $CHPY = $_SERVER['REQUEST_URI'];
 @list(,$url_variable) = explode("?", $CHPY);
 @list($source,$destination,$time,$status,$error,$file) = explode(",",$url_variable);
 
-$connect = mysql_connect($db_location,$db_user,$db_pwd) or die('Хьюстон у нас проблема');
+$connect = mysql_connect($db_location,$db_user,$db_pwd) or die($error_mess);
 mysql_select_db($db_name);
 mysql_query('SET names utf8');
 

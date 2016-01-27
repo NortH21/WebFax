@@ -19,7 +19,7 @@
         <tr>
           <td width="188" class="formLabel">Заголовок факса</td>
           <td width="232"><label for="faxHeader"></label>
-          <input name="faxHeader" type="text" id="faxHeader" value="Fax e3rc.ru" /></td>
+          <input name="faxHeader" type="text" id="faxHeader" value="Fax" /></td>
           <td width="458"  class="descriptionText">Введите заголовок, который должен отображаться в верхней части вашего факса.</td>
         </tr>
         <tr>
@@ -56,10 +56,10 @@
     <tbody>
 <?php
 include "config.php";
-$connect = mysql_connect($db_location,$db_user,$db_pwd) or die('Хьюстон у нас проблема');
-mysql_select_db('fax');
+$connect = mysql_connect($db_location,$db_user,$db_pwd) or die($error_mess);
+mysql_select_db($db_name);
 mysql_query('SET names utf8');
-$getlog_query = mysql_query("SELECT source,destination,time,status,error,file FROM `fax` ORDER BY fax.time DESC LIMIT 10");
+$getlog_query = mysql_query("SELECT source,destination,time,status,error,file FROM `$db_name` ORDER BY fax.time DESC LIMIT 10");
 while ($getlog_result = mysql_fetch_assoc($getlog_query))
 {
     echo '<tr><td>'.date('d-m-Y H:i:s', $getlog_result['time']).'</td><td>'.$getlog_result['source'].'</td><td></td><td>'.$getlog_result['destination'].'</td>';
@@ -82,3 +82,4 @@ $(document).ready(function()
 );
 </script>
 </body>
+</html>

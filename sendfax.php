@@ -12,10 +12,10 @@
     <p>
 <?php
 include "config.php";
-header('Refresh: 15; URL=http://ihor.e3rc.ru');
+header('Refresh: 15; URL=$domain');
 
-$outboundfax_context = "faxsend-t38";
-$asterisk_spool_folder = "/var/spool/asterisk/outgoing";
+$outboundfax_context = $outfax_context;
+$asterisk_spool_folder = $dir_call_f;
 $faxHeader = $_POST["faxHeader"];
 $dest = $_POST["dest"];
 $send_fax_disa_number = $_POST["fax_disa_number"];
@@ -65,7 +65,7 @@ $ext = substr($input_file_orig_name, strrpos($input_file_orig_name, '.') + 1);
   }
 
   //подключаемся к базе
-  $connect = mysql_connect($db_location,$db_user,$db_pwd) or die('Хьюстон у нас проблема');
+  $connect = mysql_connect($db_location,$db_user,$db_pwd) or die($error_mess);
   mysql_select_db($db_name);
   mysql_query('SET names utf8');
 
@@ -177,7 +177,7 @@ else  {
 
                 $callfile = "Channel:Local/send@fax_with_threads\n" .
                             "CallerID:$localID\n" .
-                                        "MaxRetries:1\n" .
+                                        "MaxRetries:3\n" .
                                         "RetryTime:60\n" .
                                         "WaitTime:100\n"  .
                                         "Archive:yes\n"  .
@@ -208,7 +208,7 @@ if ($error == $error_no_error) {
 ?>
 </p>
 </div>
-<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="<?=$domain; ?>/changelog"><?=$version; ?></a></p> 
+<p class="footer-copyrights">Web Fax for Asterisk. Released under GPLv3. <a href="<?=$domain; ?>/changelog"><?=$version; ?></a></p>
 </div>
 </body>
 </html>
