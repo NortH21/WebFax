@@ -1,3 +1,6 @@
+
+![alt Scr](http://joxi.ru/n2YaBgKcjVola2.png)
+
 apt-get install libtiff-tools
 apt-get install imagemagick
 apt-get install ghostscript
@@ -20,23 +23,23 @@ exten => send-CHANUNAVAIL,n,GoTo(send,1)
 
 [faxsend-t38]
 exten => faxout,1,Set(STARTTIME=${STRFTIME(${EPOCH},,%s)})
-exten => faxout,n,NoOP(------------------- FAX to ${RECEIVER} ------------------)
-exten => faxout,n,Wait(1)
-exten => faxout,n,SendDTMF(${send_fax_disa_number},250)
-exten => faxout,n,Background(/var/lib/asterisk/sounds/ru/out_fax,skip)
-exten => faxout,n,Set(FAXFILE=${TIFF_2_SEND})
-exten => faxout,n,Set(FAXFILESENT=Sent-to-${RECEIVER}-${STARTTIME})
-exten => faxout,n,Set(FAXOPT(ecm)=yes)
-exten => faxout,n,Set(FAXOPT(headerinfo)=${TAGLINE})
-exten => faxout,n,Set(FAXOPT(maxrate)=14400)
-exten => faxout,n,Set(FAXOPT(minrate)=2400)
-exten => faxout,n,Set(FAXOPT(localstationid)=${LOCALSTATIONID})
-exten => faxout,n,WaitForSilence(250,1,15)
-exten => faxout,n,SendFAX(${FAXFILE},dfzs)
-exten => faxout,n,NoOP(— ${FAXSTATUS} —${FAXERROR} —)
-exten => faxout,n,System(/usr/bin/tiff2pdf ${FAXFILE} -o /var/spool/asterisk/fax/mnt/${FAXFILESENT}.pdf)
-exten => faxout,n,System(curl http://192.168.100.223/not.php?XXXXXX,${RECEIVER},${STARTTIME},${FAXSTATUS},${FAXERROR},${FAXFILESENT})
-exten => faxout,n,HangUp()
+ same => n,NoOP(------------------- FAX to ${RECEIVER} ------------------)
+ same => faxout,n,Wait(1)
+ same => faxout,n,SendDTMF(${send_fax_disa_number},250)
+ same => faxout,n,Background(/var/lib/asterisk/sounds/ru/out_fax,skip)
+ same => faxout,n,Set(FAXFILE=${TIFF_2_SEND})
+ same => faxout,n,Set(FAXFILESENT=Sent-to-${RECEIVER}-${STARTTIME})
+ same => faxout,n,Set(FAXOPT(ecm)=yes)
+ same => faxout,n,Set(FAXOPT(headerinfo)=${TAGLINE})
+ same => faxout,n,Set(FAXOPT(maxrate)=14400)
+ same => faxout,n,Set(FAXOPT(minrate)=2400)
+ same => faxout,n,Set(FAXOPT(localstationid)=${LOCALSTATIONID})
+ same => faxout,n,WaitForSilence(250,1,15)
+ same => faxout,n,SendFAX(${FAXFILE},dfzs)
+ same => faxout,n,NoOP(— ${FAXSTATUS} —${FAXERROR} —)
+ same => faxout,n,System(/usr/bin/tiff2pdf ${FAXFILE} -o /var/spool/asterisk/fax/mnt/${FAXFILESENT}.pdf)
+ same => faxout,n,System(curl http://192.168.100.223/not.php?XXXXXX,${RECEIVER},${STARTTIME},${FAXSTATUS},${FAXERROR},${FAXFILESENT})
+ same => faxout,n,HangUp()
 
 [fax-rx]
 exten => _XXXXXX,1,NoOP(------------------- FAX from ${CALLERID(number)} ------------------)
