@@ -9,7 +9,7 @@ $own_phone_number="593113";
 //Version fax system
 $version="v.1.0.3";
 //Domain name
-$domain="http://ihor.e3rc.ru/fax";
+$domain="https://e3rc.ru/fax";
 //Error message or not connect MySQL
 $error_mess="Houston we have a problem, MySQL is not available.";
 //Asterisk settings
