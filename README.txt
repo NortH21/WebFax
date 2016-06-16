@@ -7,6 +7,27 @@ apt-get install ghostscript
 apt-get install unoconv
 apt-get install curl libcurl3 libcurl3-dev php5-curl
 
+ CREATE TABLE `fax` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `source` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `error` varchar(255) DEFAULT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1397 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` int(11) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `ip_local` varchar(255) DEFAULT NULL,
+  `send_phone` varchar(255) DEFAULT NULL,
+  `send_file_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=434 DEFAULT CHARSET=latin1;
+
 cat /etc/asterisk/extensions.conf
 
 [fax_with_threads]
