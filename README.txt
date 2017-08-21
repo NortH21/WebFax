@@ -1,6 +1,6 @@
 
 
-<img src="http://joxi.ru/n2YaBgKcjVola2.png"/>
+<img src="http://joxi.ru/n2YaBgKcjVola2.png/">
 
 apt-get install libtiff-tools
 apt-get install imagemagick
